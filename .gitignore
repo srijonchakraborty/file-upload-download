@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs
+/FileUploadDownloadHub/node_modules
+/FileUploadDownloadHub/package-lock.json
