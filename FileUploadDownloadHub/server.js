@@ -63,10 +63,33 @@ function generateFileListHTML(currentPath, items) {
         html += '</div>';
     });
 
-    html += '<button type="button" onclick="downloadSelectedFiles()">Download Selected Files</button>';
+    //html += '<button type="button" onclick="downloadSelectedFiles()">Download Selected Files</button>';
     html += '</form>';
     return html;
 }
+
+
+app.get('/download/single', (req, res) => {
+    const file = req.query.file;
+
+    if (!file) {
+        return res.status(400).send('Invalid file specified');
+    }
+
+    const filePath = decodeURIComponent(file);
+
+    if (!fs.existsSync(filePath)) {
+        return res.status(404).send('File not found');
+    }
+
+    const fileContent = fs.readFileSync(filePath);
+
+    res.set('Content-Type', 'application/octet-stream');
+    res.set('Content-Disposition', `attachment; filename=${path.basename(filePath)}`);
+    res.set('Content-Length', fileContent.length);
+
+    res.end(fileContent, 'binary');
+});
 
 
 // Start the server

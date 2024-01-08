@@ -40,3 +40,44 @@ async function uploadFiles() {
         console.error('No files selected');
     }
 }
+
+async function downloadSelectedFiles() {
+    const fileInputs = document.querySelectorAll('input[name="files"]:checked');
+    const files = Array.from(fileInputs).map(input => input.value);
+
+    try {
+        for (const file of files) {
+
+            try {
+                // Decode the double-encoded file path
+                const decodedFile = decodeURIComponent(file);
+                // Encode spaces and special characters in the file path
+                const encodedFile = encodeURIComponent(decodedFile).replace(/%20/g, ' ');
+
+                const url = `/download/single?file=${encodedFile}`;
+
+                const response = await fetch(url);
+
+                if (response.ok) {
+                    // Create a blob from the response and initiate download
+                    const blob = await response.blob();
+                    const filename = decodedFile.split('/').pop();
+                    const link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = filename;
+                    link.click();
+                } else {
+                    let ee = `Error downloading file: ${decodedFile}`;
+                    console.error(ee);
+                    document.getElementById('errorText').value = ee ;
+                }
+            }
+            catch (error) {
+                document.getElementById('errorText').innerText = "File Name Problem change the file name.";
+                console.error('Inner Error downloading files', error);
+            }
+        }
+    } catch (error) {
+        console.error('Error downloading files', error);
+    }
+}
