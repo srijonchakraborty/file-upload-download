@@ -44,8 +44,11 @@ async function uploadFiles() {
 async function downloadSelectedFiles() {
     const fileInputs = document.querySelectorAll('input[name="files"]:checked');
     const files = Array.from(fileInputs).map(input => input.value);
-
+    const filesTexts = Array.from(fileInputs).map(input => input.parentNode.textContent.trim());
+    
     try {
+        document.getElementById('errorText').innerText = "";
+        let count = 0;
         for (const file of files) {
 
             try {
@@ -64,14 +67,15 @@ async function downloadSelectedFiles() {
                     const filename = decodedFile.split('/').pop();
                     const link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
-                    link.download = filename;
+                    link.download = filesTexts[count];// filename;
                     link.click();
                 } else {
                     console.error(ee);
                 }
+                count++;
             }
             catch (error) {
-                document.getElementById('errorText').innerText = file.+':'+'File Name Problem change the file name.';
+                document.getElementById('errorText').innerText.append(filesTexts[count] + ':' + 'File Name Problem change the file name.');
                 console.error('Inner Error downloading files', error);
             }
         }
