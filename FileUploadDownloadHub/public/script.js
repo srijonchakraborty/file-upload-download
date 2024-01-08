@@ -27,23 +27,12 @@ async function uploadFiles() {
             formData.append('file', file);
 
             try {
-               /* const response = await fetch('/upload', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (response.ok) {
-                    console.log('File uploaded successfully');
-                } else {
-                    console.error('Error uploading file');
-                }*/
-                
+                document.getElementById('progressFileNameText').hidden = false;
                 document.getElementById('progressFileNameText').innerText = file.name;
                 performUpload(formData, function (response) {
                     // Handle the response here
                     console.log('Server response:', response);
                 });
-                document.getElementById('progressBarContainer').style.display = 'block';
             }
             catch (error) {
                 console.error('Error uploading file', error);
@@ -59,6 +48,7 @@ function updateProgressBar(e) {
     if (e.lengthComputable) {
         const percentComplete = (e.loaded / e.total) * 100;
         document.getElementById('progressText').innerText = percentComplete + '%';
+        document.getElementById('progressText').hidden = false;
         document.getElementById('progressBar').width = percentComplete;
 
         document.getElementById('progressBarContainerOld').style.width = percentComplete + '%';
@@ -68,7 +58,6 @@ function updateProgressBar(e) {
 function handleUploadResponse(xhr, callback) {
     if (xhr.status === 200) {
         console.log(xhr.responseText);
-        document.getElementById('progressBarContainer').style.display = 'none';
     } else {
         console.error('Error uploading file');
     }

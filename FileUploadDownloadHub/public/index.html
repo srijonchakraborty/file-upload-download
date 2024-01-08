@@ -10,18 +10,18 @@
     <script src="script.js"></script>
     <div style="font-size:16px; font-weight:bold; color:red" id="errorText"></div>
 
-    <svg width="400" height="110">
-        <rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" id="progressBarContainer"/>
-    </svg>
 
     <h1>File Upload Download Portal</h1>
-    <div style="border:dotted; min-height:10px;min-width:10px;width:10.23%" id="progressBarContainerOld">
-        <div id="progressBar"></div>
-    </div>
+   
 
     <form id="uploadMultipleForm" enctype="multipart/form-data">
-        <div style="border: dotted; font-size: 16px; font-weight: bold; color: green" id="progressFileNameText"></div>
-        <div style="border: dotted; font-size: 16px; font-weight: bold; color: green" id="progressText"></div>
+        <div>
+            <div style="background-color:blueviolet;min-height:10px;min-width:1px;width:0%" id="progressBarContainerOld">
+                <div id="progressBar"></div>
+            </div>
+            <div style="border: dotted; font-size: 16px; font-weight: bold; color: green" id="progressFileNameText" hidden></div>
+            <div style="border: dotted; font-size: 16px; font-weight: bold; color: green" id="progressText" hidden></div>
+        </div>
         <br>
         <input type="file" name="files[]" id="multipleFileInput" multiple />
         <button type="button" onclick="uploadFiles()">Upload Multiple</button>
