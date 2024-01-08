@@ -76,7 +76,6 @@ function generateFileListHTML(currentPath, items) {
         html += '</div>';
     });
 
-    //html += '<button type="button" onclick="downloadSelectedFiles()">Download Selected Files</button>';
     html += '</form>';
     return html;
 }
