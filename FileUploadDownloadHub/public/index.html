@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>File Uploader/Downloader</title>
+    <title>File Upload Download Portal</title>
 </head>
 <body>
-    <h1>File Uploader/Downloader</h1>
+    <h1>File Upload Download Portal</h1>
+
+    <form id="uploadMultipleForm" enctype="multipart/form-data">
+        <input type="file" name="files[]" id="multipleFileInput" multiple />
+        <button type="button" onclick="uploadFiles()">Upload Multiple</button>
+    </form>
+
+    <br><br>
 
     <!-- Add a link/button to navigate to the file explorer -->
     <a href="/files" target="_blank">View File Explorer</a>
