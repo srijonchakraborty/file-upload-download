@@ -7,6 +7,7 @@
     <title>File Upload Download Portal</title>
 </head>
 <body>
+    <script src="script.js"></script>
     <div style="font-size:16px; font-weight:bold; color:red" id="errorText"></div>
     <h1>File Upload Download Portal</h1>
 
@@ -16,16 +17,16 @@
     </form>
 
     <br><br>
-    <div style="border:dotted">
+    <div style="border:dotted; padding:10px;margin:5px;">
         <button type="button" onclick="getUploadFileList()">Show Upload Folder</button>
         <button type="button" onclick="getFileList()">Show Download Folder</button>
     </div>
-    <!-- Add a link/button to navigate to the file explorer -->
-    <a href="/files" target="_blank">View File Explorer</a>
 
-    <h1>File Explorer Header</h1>
-    <div id="fileList"></div>
-    <button type="button" onclick="downloadSelectedFiles()">File List Download Selected Files</button>
-    <script src="script.js"></script>
+    <div style="border:dotted; padding:10px;margin:5px;">
+        <h1>File Explorer Header</h1>
+        <div id="fileList"></div>
+        <button type="button" onclick="downloadSelectedFiles()">File List Download Selected Files</button>
+    </div>
+
 </body>
 </html>
