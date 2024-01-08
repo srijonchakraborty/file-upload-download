@@ -8,6 +8,13 @@ async function getFileList() {
     fileListElement.innerHTML = html;
 }
 
+async function getUploadFileList() {
+    const response = await fetch('/files-uploads');
+    const html = await response.text();
+
+    const fileListElement = document.getElementById('fileList');
+    fileListElement.innerHTML = html;
+}
 
 async function uploadFiles() {
     const fileInput = document.getElementById('multipleFileInput');

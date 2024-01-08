@@ -40,6 +40,19 @@ app.get('/files', (req, res) => {
     });
 });
 
+app.get('/files-uploads', (req, res) => {
+    const uploadDir = path.join(__dirname, 'uploads');
+
+    fs.readdir(uploadDir, { withFileTypes: true }, (err, items) => {
+        if (err) {
+            return res.status(500).send('Error reading upload directory');
+        }
+
+        const html = generateFileListHTML(uploadDir, items);
+        res.send(html);
+    });
+});
+
 // Generate HTML for displaying the folder structure and file items
 function generateFileListHTML(currentPath, items) {
     let html = '<p>File Explorer</p>';
