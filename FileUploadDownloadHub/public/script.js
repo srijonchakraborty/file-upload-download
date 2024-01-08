@@ -67,13 +67,11 @@ async function downloadSelectedFiles() {
                     link.download = filename;
                     link.click();
                 } else {
-                    let ee = `Error downloading file: ${decodedFile}`;
                     console.error(ee);
-                    document.getElementById('errorText').value = ee ;
                 }
             }
             catch (error) {
-                document.getElementById('errorText').innerText = "File Name Problem change the file name.";
+                document.getElementById('errorText').innerText = file.+':'+'File Name Problem change the file name.';
                 console.error('Inner Error downloading files', error);
             }
         }
