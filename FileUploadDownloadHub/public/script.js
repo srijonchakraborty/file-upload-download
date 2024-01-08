@@ -40,3 +40,46 @@ async function uploadFiles() {
         console.error('No files selected');
     }
 }
+
+async function downloadSelectedFiles() {
+    const fileInputs = document.querySelectorAll('input[name="files"]:checked');
+    const files = Array.from(fileInputs).map(input => input.value);
+    const filesTexts = Array.from(fileInputs).map(input => input.parentNode.textContent.trim());
+    
+    try {
+        document.getElementById('errorText').innerText = "";
+        let count = 0;
+        for (const file of files) {
+
+            try {
+                // Decode the double-encoded file path
+                const decodedFile = decodeURIComponent(file);
+                // Encode spaces and special characters in the file path
+                const encodedFile = encodeURIComponent(decodedFile).replace(/%20/g, ' ');
+
+                const url = `/download/single?file=${encodedFile}`;
+
+                const response = await fetch(url);
+
+                if (response.ok) {
+                    // Create a blob from the response and initiate download
+                    const blob = await response.blob();
+                    const filename = decodedFile.split('/').pop();
+                    const link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = filesTexts[count];// filename;
+                    link.click();
+                } else {
+                    console.error(ee);
+                }
+                count++;
+            }
+            catch (error) {
+                document.getElementById('errorText').innerText.append(filesTexts[count] + ':' + 'File Name Problem change the file name.');
+                console.error('Inner Error downloading files', error);
+            }
+        }
+    } catch (error) {
+        console.error('Error downloading files', error);
+    }
+}
