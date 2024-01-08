@@ -8,6 +8,13 @@ async function getFileList() {
     fileListElement.innerHTML = html;
 }
 
+async function getUploadFileList() {
+    const response = await fetch('/files-uploads');
+    const html = await response.text();
+
+    const fileListElement = document.getElementById('fileList');
+    fileListElement.innerHTML = html;
+}
 
 async function uploadFiles() {
     const fileInput = document.getElementById('multipleFileInput');
@@ -20,7 +27,7 @@ async function uploadFiles() {
             formData.append('file', file);
 
             try {
-                const response = await fetch('/upload', {
+               /* const response = await fetch('/upload', {
                     method: 'POST',
                     body: formData,
                 });
@@ -29,7 +36,14 @@ async function uploadFiles() {
                     console.log('File uploaded successfully');
                 } else {
                     console.error('Error uploading file');
-                }
+                }*/
+                
+                document.getElementById('progressFileNameText').innerText = file.name;
+                performUpload(formData, function (response) {
+                    // Handle the response here
+                    console.log('Server response:', response);
+                });
+                document.getElementById('progressBarContainer').style.display = 'block';
             }
             catch (error) {
                 console.error('Error uploading file', error);
@@ -40,6 +54,46 @@ async function uploadFiles() {
         console.error('No files selected');
     }
 }
+
+function updateProgressBar(e) {
+    if (e.lengthComputable) {
+        const percentComplete = (e.loaded / e.total) * 100;
+        document.getElementById('progressText').innerText = percentComplete + '%';
+        document.getElementById('progressBar').width = percentComplete;
+
+        document.getElementById('progressBarContainerOld').style.width = percentComplete + '%';
+    }
+}
+
+function handleUploadResponse(xhr, callback) {
+    if (xhr.status === 200) {
+        console.log(xhr.responseText);
+        document.getElementById('progressBarContainer').style.display = 'none';
+    } else {
+        console.error('Error uploading file');
+    }
+
+    // Invoke the callback with the response
+    callback(xhr.responseText);
+}
+
+function performUpload(formData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/upload', true);
+
+    // Update progress bar
+    xhr.upload.onprogress = function (e) {
+        updateProgressBar(e);
+    };
+
+    // Request completed
+    xhr.onload = function () {
+        handleUploadResponse(xhr, callback);
+    };
+
+    xhr.send(formData);
+}
+
 
 async function downloadSelectedFiles() {
     const fileInputs = document.querySelectorAll('input[name="files"]:checked');
