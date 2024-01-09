@@ -20,6 +20,8 @@ const upload = multer({ storage: storage });
 
 // Serve static files from the 'public' folder
 app.use(express.static('public'));
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+
 
 // Handle single file upload
 app.post('/upload', upload.single('file'), (req, res) => {
