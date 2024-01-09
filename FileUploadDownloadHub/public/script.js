@@ -1,4 +1,17 @@
-document.addEventListener('DOMContentLoaded', getFileList);
+document.addEventListener('DOMContentLoaded', bindListeners);
+async function bindListeners() {
+    getFileList();
+    bindFileInputListener();
+}
+
+async function bindFileInputListener() {
+    const fileInput = document.getElementById('multipleFileInput');
+    if (fileInput) {
+        fileInput.addEventListener('change', handleFileSelect);
+    } else {
+        console.error('File input with ID "multipleFileInput" not found');
+    }
+}
 
 async function getFileList() {
     const response = await fetch('/files');
@@ -51,7 +64,8 @@ function updateProgressBar(e) {
         document.getElementById('progressText').hidden = false;
         document.getElementById('progressBar').width = percentComplete;
 
-        document.getElementById('progressBarContainerOld').style.width = percentComplete + '%';
+        document.getElementById('progressBarContainerOld2').style.width = percentComplete + '%';
+        document.getElementById('progressBarContainerOld2').innerText = percentComplete + '%';
     }
 }
 
@@ -124,4 +138,20 @@ async function downloadSelectedFiles() {
     } catch (error) {
         console.error('Error downloading files', error);
     }
+}
+
+
+function handleFileSelect(event) {
+    const fileList = event.target.files;
+    const fileListContainer = document.getElementById('uploadFileList');
+   
+    fileListContainer.innerHTML = '';
+    let countFile =1;
+    Array.from(fileList).forEach(file => {
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item';
+        listItem.textContent = countFile +'. '+file.name;
+        fileListContainer.appendChild(listItem);
+        countFile++;
+    });
 }
