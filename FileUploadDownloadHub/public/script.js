@@ -118,7 +118,7 @@ async function downloadSelectedFiles() {
                 count++;
             }
             catch (error) {
-                document.getElementById('errorText').innerText.append(filesTexts[count] + ':' + 'File Name Problem change the file name.');
+                document.getElementById('errorText').innerText=(filesTexts[count] + ':' + 'File Name Problem change the file name.');
                 console.error('Inner Error downloading files', error);
             }
         }
