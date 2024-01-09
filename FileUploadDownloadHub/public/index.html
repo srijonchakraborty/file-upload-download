@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>File Upload Download Portal</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
 
 
     <h1>File Upload Download Portal</h1>
-   
+
 
     <form id="uploadMultipleForm" enctype="multipart/form-data">
         <div>
@@ -24,7 +25,7 @@
         </div>
         <br>
         <input type="file" name="files[]" id="multipleFileInput" multiple />
-        <button type="button" onclick="uploadFiles()">Upload Multiple</button>
+        <button class="btn btn-primary mt-3" type="button" onclick="uploadFiles()">Upload Multiple</button>
     </form>
 
     <br><br>
@@ -36,7 +37,7 @@
     <div style="border:dotted; padding:10px;margin:5px;">
         <h1>File Explorer Header</h1>
         <div id="fileList"></div>
-        <button type="button" onclick="downloadSelectedFiles()">File List Download Selected Files</button>
+        <button type="button" onclick="downloadSelectedFiles()">Download Selected Files</button>
     </div>
 
 </body>
