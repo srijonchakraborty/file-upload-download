@@ -107,7 +107,6 @@ async function downloadSelectedFiles() {
                 if (response.ok) {
                     // Create a blob from the response and initiate download
                     const blob = await response.blob();
-                    const filename = decodedFile.split('/').pop();
                     const link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
                     link.download = filesTexts[count];// filename;
