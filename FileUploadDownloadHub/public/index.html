@@ -9,12 +9,10 @@
 </head>
 <body>
     <script src="script.js"></script>
-    <div style="font-size:16px; font-weight:bold; color:red" id="errorText"></div>
-
-
-    <h1 class="display-3 text-center">File Upload Download Portal</h1>
 
     <div class="container-fluid">
+        <div style="font-size:16px; font-weight:bold; color:red" id="errorText"></div>
+        <h1 class="display-3 text-center">File Upload Download Portal</h1>
         <div class="row">
 
             <div class="col-md-6" style="background-color: #f0f0f0;">
@@ -22,7 +20,9 @@
                 <form id="uploadMultipleForm" enctype="multipart/form-data">
                     <div class="input-group" style="margin:5px">
                         <input type="file" class="form-control" name="files[]" id="multipleFileInput" multiple>
-                        <button class="btn btn-primary" type="button" onclick="uploadFiles()">Upload Files</button>
+                        <button class="btn btn-labeled btn-success" type="button" onclick="uploadFiles()">
+                            Upload Files
+                        </button>
                     </div>
                     <div>
                         <div class="progress">
@@ -39,23 +39,30 @@
             </div>
             <div class="col-md-6 overflow-auto" style="min-height: 150px; max-height: 350px; background-color: #d0d0d0;">
                 <h3 class="display-6 text-center sticky-top py-3 mb-3" style="background-color: #d0d0d0;">Selected Files</h3>
-                <ul id="uploadFileList" class="list-group mt-3 overflow-auto"></ul>
+                <ul id="uploadFileList" class="list-group mt-3 overflow-auto" style="margin-bottom:5px"></ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-6 d-flex justify-content-center">
+                    <button style="min-width:250px" class="col-md-12 btn btn-lg btn-info mt-3 btn-block" type="button" onclick="getUploadFileList()">Show Upload Folder</button>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <button style="min-width:250px" class="col-md-12 btn btn-info btn-lg mt-3 btn-block" type="button" onclick="getFileList()">Show Download Folder</button>
+                </div>
+            </div>
+
+            <div class="row mt-2" style="background-color: #e0e0e0; margin-left: 0px">
+                <h1 class="display-3">File Explorer Header</h1>
+                <div class="row" id="fileList"></div>
+                <div class="row justify-content-center mb-2">
+                    <button class="col-md-10 btn btn-lg btn-warning mt-3 btn-block" type="button" onclick="downloadSelectedFiles()">
+                        Download Selected Files
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-
-
-    <br><br>
-    <div style="border:dotted; padding:10px;margin:5px;">
-        <button class="btn btn-primary mt-3" type="button" onclick="getUploadFileList()">Show Upload Folder</button>
-        <button class="btn btn-primary mt-3" type="button" onclick="getFileList()">Show Download Folder</button>
-    </div>
-
-    <div style="border:dotted; padding:10px;margin:5px;">
-        <h1>File Explorer Header</h1>
-        <div id="fileList"></div>
-        <button type="button" onclick="downloadSelectedFiles()">Download Selected Files</button>
-    </div>
-
 </body>
 </html>
