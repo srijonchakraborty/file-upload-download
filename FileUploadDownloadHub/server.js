@@ -57,22 +57,22 @@ app.get('/files-uploads', (req, res) => {
 
 // Generate HTML for displaying the folder structure and file items
 function generateFileListHTML(currentPath, items) {
-    let html = '<p>File Explorer</p>';
-    html += '<form id="downloadForm">';
+    let html = '<form id="downloadForm">';
 
     items.forEach(item => {
         const itemPath = path.join(currentPath, item.name);
         const isDirectory = item.isDirectory();
 
-        html += '<div>';
+        html += '<div class="row mt-1 d-flex align-items-center">';
 
         if (isDirectory) {
             html += `<strong>${item.name}/</strong>`;
             const subItems = fs.readdirSync(itemPath, { withFileTypes: true });
             html += generateFileListHTML(itemPath, subItems);
         } else {
-            html += `<input type="checkbox" name="files" value="${encodeURIComponent(itemPath)}" /> `;
-            html += `${item.name}`;
+            html += `<input class="form-check-input" style="min-height:25px; margin-left:10px;" type="checkbox" name="files" value="${encodeURIComponent(itemPath)}" /> `;
+           
+            html += `&nbsp;${item.name}`;
         }
 
         html += '</div>';

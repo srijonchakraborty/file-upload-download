@@ -9,36 +9,60 @@
 </head>
 <body>
     <script src="script.js"></script>
-    <div style="font-size:16px; font-weight:bold; color:red" id="errorText"></div>
 
+    <div class="container-fluid">
+        <div style="font-size:16px; font-weight:bold; color:red" id="errorText"></div>
+        <h1 class="display-3 text-center">File Upload Download Portal</h1>
+        <div class="row">
 
-    <h1>File Upload Download Portal</h1>
-
-
-    <form id="uploadMultipleForm" enctype="multipart/form-data">
-        <div>
-            <div style="background-color:blueviolet;min-height:10px;min-width:1px;width:0%" id="progressBarContainerOld">
-                <div id="progressBar"></div>
+            <div class="col-md-6" style="background-color: #f0f0f0;">
+                <h3 class="display-6 text-center sticky-top py-3 mb-3">Select Files to Upload</h3>
+                <form id="uploadMultipleForm" enctype="multipart/form-data">
+                    <div class="input-group" style="margin:5px">
+                        <input type="file" class="form-control" name="files[]" id="multipleFileInput" multiple>
+                        <button class="btn btn-labeled btn-success" type="button" onclick="uploadFiles()">
+                            Upload Files
+                        </button>
+                    </div>
+                    <div>
+                        <div class="progress">
+                            <div id="progressBarContainerOld" class="progress-bar progress-bar-striped bg-success"
+                                 role="progressbar" style="width: 0%"
+                                 aria-valuenow="0" aria-valuemin="0"
+                                 aria-valuemax="100">
+                            </div>
+                        </div>
+                        <div style="border: dotted; font-size: 16px; font-weight: bold; color: green" id="progressFileNameText" hidden></div>
+                        <div style="border: dotted; font-size: 16px; font-weight: bold; color: green" id="progressText" hidden></div>
+                    </div>
+                </form>
             </div>
-            <div style="border: dotted; font-size: 16px; font-weight: bold; color: green" id="progressFileNameText" hidden></div>
-            <div style="border: dotted; font-size: 16px; font-weight: bold; color: green" id="progressText" hidden></div>
+            <div class="col-md-6 overflow-auto" style="min-height: 150px; max-height: 350px; background-color: #d0d0d0;">
+                <h3 class="display-6 text-center sticky-top py-3 mb-3" style="background-color: #d0d0d0;">Selected Files</h3>
+                <ul id="uploadFileList" class="list-group mt-3 overflow-auto" style="margin-bottom:5px"></ul>
+            </div>
         </div>
-        <br>
-        <input type="file" name="files[]" id="multipleFileInput" multiple />
-        <button class="btn btn-primary mt-3" type="button" onclick="uploadFiles()">Upload Multiple</button>
-    </form>
 
-    <br><br>
-    <div style="border:dotted; padding:10px;margin:5px;">
-        <button type="button" onclick="getUploadFileList()">Show Upload Folder</button>
-        <button type="button" onclick="getFileList()">Show Download Folder</button>
+        <div class="row">
+            <div class="row">
+                <div class="col-md-6 d-flex justify-content-center">
+                    <button style="min-width:250px" class="col-md-12 btn btn-lg btn-primary mt-3 btn-block" type="button" onclick="getUploadFileList()">Show Upload Folder</button>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <button style="min-width:250px" class="col-md-12 btn btn-primary btn-lg mt-3 btn-block" type="button" onclick="getFileList()">Show Download Folder</button>
+                </div>
+            </div>
+
+            <div class="row mt-2" style="background-color: #e0e0e0; margin-left: 0px">
+                <h1 class="display-3">File Explorer Header</h1>
+                <div style="margin-left: 15px; padding-bottom: 5px; max-height: 450px; overflow-y: auto; border: 1px solid #ccc;" class="row col-md-11 overflow-auto" id="fileList"></div>
+                <div style="margin-left:0px;" class="row  mb-2">
+                    <button class="col-md-11 btn btn-lg btn-warning mt-3 btn-block" type="button" onclick="downloadSelectedFiles()">
+                        Download Selected Files
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div style="border:dotted; padding:10px;margin:5px;">
-        <h1>File Explorer Header</h1>
-        <div id="fileList"></div>
-        <button type="button" onclick="downloadSelectedFiles()">Download Selected Files</button>
-    </div>
-
 </body>
 </html>
