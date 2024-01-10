@@ -46,18 +46,18 @@
         <div class="row">
             <div class="row">
                 <div class="col-md-6 d-flex justify-content-center">
-                    <button style="min-width:250px" class="col-md-12 btn btn-lg btn-info mt-3 btn-block" type="button" onclick="getUploadFileList()">Show Upload Folder</button>
+                    <button style="min-width:250px" class="col-md-12 btn btn-lg btn-primary mt-3 btn-block" type="button" onclick="getUploadFileList()">Show Upload Folder</button>
                 </div>
                 <div class="col-md-6 d-flex justify-content-center">
-                    <button style="min-width:250px" class="col-md-12 btn btn-info btn-lg mt-3 btn-block" type="button" onclick="getFileList()">Show Download Folder</button>
+                    <button style="min-width:250px" class="col-md-12 btn btn-primary btn-lg mt-3 btn-block" type="button" onclick="getFileList()">Show Download Folder</button>
                 </div>
             </div>
 
             <div class="row mt-2" style="background-color: #e0e0e0; margin-left: 0px">
                 <h1 class="display-3">File Explorer Header</h1>
-                <div class="row" id="fileList"></div>
-                <div class="row justify-content-center mb-2">
-                    <button class="col-md-10 btn btn-lg btn-warning mt-3 btn-block" type="button" onclick="downloadSelectedFiles()">
+                <div style="margin-left: 15px; padding-bottom: 5px; max-height: 450px; overflow-y: auto; border: 1px solid #ccc;" class="row col-md-11 overflow-auto" id="fileList"></div>
+                <div style="margin-left:0px;" class="row  mb-2">
+                    <button class="col-md-11 btn btn-lg btn-warning mt-3 btn-block" type="button" onclick="downloadSelectedFiles()">
                         Download Selected Files
                     </button>
                 </div>
