@@ -9,14 +9,16 @@
 </head>
 <body>
     <script src="script.js"></script>
-
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
     <div class="container-fluid">
         <div style="font-size:16px; font-weight:bold; color:red" id="errorText"></div>
         <h1 class="display-3 text-center">File Upload Download Portal</h1>
         <div class="row">
 
             <div class="col-md-6" style="background-color: #f0f0f0;">
-                <h3 class="display-6 text-center sticky-top py-3 mb-3">Select Files to Upload</h3>
+                <h3 class="display-6 text-center py-3 mb-3">Select Files to Upload</h3>
                 <form id="uploadMultipleForm" enctype="multipart/form-data">
                     <div class="input-group" style="margin:5px">
                         <input type="file" class="form-control" name="files[]" id="multipleFileInput" multiple>
@@ -55,7 +57,8 @@
 
             <div class="row mt-2" style="background-color: #e0e0e0; margin-left: 0px">
                 <h1 class="display-3">File Explorer Header</h1>
-                <div style="margin-left: 15px; padding-bottom: 5px; max-height: 450px; overflow-y: auto; border: 1px solid #ccc;" class="row col-md-11 overflow-auto" id="fileList"></div>
+                <div style="margin-left: 15px; padding-bottom: 5px; max-height: 450px; overflow-y: auto; overflow-x: auto; border: 1px solid #ccc; " 
+                     class="row col-md-11 overflow-auto" id="fileList"></div>
                 <div style="margin-left:0px;" class="row  mb-2">
                     <button class="col-md-11 btn btn-lg btn-warning mt-3 btn-block" type="button" onclick="downloadSelectedFiles()">
                         Download Selected Files
