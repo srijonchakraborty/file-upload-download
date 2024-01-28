@@ -7,3 +7,5 @@ After bootstarp added.
 ![image](https://github.com/srijonchakraborty/file-upload-download/assets/10357119/5377b1ad-2579-4315-933a-f120d8bbfd1b)
 After backgroung added.
 ![image](https://github.com/srijonchakraborty/file-upload-download/assets/10357119/8179cf50-c2c7-4983-b474-bae09b3e73e4)
+
+Note: this file download upload application is not ideal project for large files. In future, I might will update the code and make suitable for large file upload and download
